@@ -1,4 +1,5 @@
 using EmployeeManagementSystem.DataAccessLayer;
+using EmployeeManagementSystem.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<EMScontext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<EmployeeService>();
+builder.Services.AddTransient<EmployeeRepository>();
 
 var app = builder.Build();
 
