@@ -7,6 +7,6 @@ namespace EmployeeManagementSystem.Model
         [Key]
         public int id{get;set;}
         public string? gender{get;set;}
-        public virtual EmployeeDetails? EmployeeDetails{get;set;}
+        public virtual ICollection<EmployeeDetails>? EmployeeDetails{get;set;}
     }
 }

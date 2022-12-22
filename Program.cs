@@ -15,7 +15,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<Iservice,EmployeeService>();
 builder.Services.AddTransient<IRepository,EmployeeRepository>();
 // to prevent cycle path response in api response
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling =
+Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

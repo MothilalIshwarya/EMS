@@ -20,8 +20,7 @@ namespace EmployeeManagementSystem.DataAccessLayer
         public EmployeeDetails GetEmployeeDetailById(int id)
         {
 
-            return _EMSContext.EmployeeDetails.Where(e => e.Id == id).Include(e=>e.Designation).Include(e=>e.gender).FirstOrDefault()!;
-            //return _EMSContext.EmployeeDetails.Include(e=>e.Designation).FirstOrDefault(e => e.Id == id)!;
+            return _EMSContext.EmployeeDetails.Include(e=>e.Designation).Include(e=>e.gender).Where(e => e.Id == id).FirstOrDefault()!;
 
         }
         public bool CreateEmployee(EmployeeDetails employeeDetails)

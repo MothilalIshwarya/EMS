@@ -19,8 +19,8 @@ namespace EmployeeManagementSystem.Model
         public int Genderid { get; set; }
        
         public int designationId { get; set; }
-        public virtual ICollection<Gender>? gender{get;set;}
-        public virtual ICollection<Designation>? Designation{get;set;}
+        public virtual Gender? gender{get;set;}
+        public virtual Designation? Designation{get;set;}
 
     }
 }
