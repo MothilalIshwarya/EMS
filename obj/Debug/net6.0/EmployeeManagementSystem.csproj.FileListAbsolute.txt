@@ -59,3 +59,7 @@ C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\o
 C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\obj\Debug\net6.0\EmployeeManagementSystem.pdb
 C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\obj\Debug\net6.0\EmployeeManagementSystem.genruntimeconfig.cache
 C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\obj\Debug\net6.0\ref\EmployeeManagementSystem.dll
+C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Public\Rafi Training\Employee management\EMS\EmployeeManagementSystem\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

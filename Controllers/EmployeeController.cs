@@ -9,71 +9,46 @@ namespace EmployeeManagementSystem.Controllers
     [Route("[Controller]/[action]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _service;
-        public EmployeeController(EmployeeService _EmployeeService){
-            _service=_EmployeeService;
+        private readonly Iservice _service;
+        public EmployeeController(Iservice _EmployeeService)
+        {
+            _service = _EmployeeService;
         }
         [HttpGet]
-        public IActionResult GetAllEmployee(){
-            try{
-                var User=_service.GetAllEmployeeDetails();
-                return User.Count()!=0 ? Ok(User):NotFound("No data Found");
-                
-            }
-            catch(Exception ex){
-                return Problem();
-            }
+        public IActionResult GetAllEmployee()
+        {
+            var User = _service.GetAllEmployeeDetails();
+            return User.Count() != 0 ? Ok(User) : BadRequest("No data Found");
         }
         [HttpGet]
-        public IActionResult GetEmployeeDetailById(int id){
-            if(id<=0) return NotFound("Enter valid EmployeeId");
-            try{
-                var User=_service.GetEmployeeDetailById(id);
-                return User is not null? Ok(User):NotFound("Enter valid EmployeeId");
-            }
-            catch(Exception ex){
-                return Problem();
-            }
+        public IActionResult GetEmployeeDetailById(int id)
+        {
+            if (id <= 0) return BadRequest("Enter valid EmployeeId");
+            var User = _service.GetEmployeeDetailById(id);
+            return User is not null ? Ok(User) : BadRequest("Enter valid EmployeeId");
+           // return Ok(_service.GetEmployeeDetailById(id));
         }
         [HttpPost]
-        public IActionResult CreateEmployee(EmployeeDetails employeeDetails){
-           // if(employeeDetails==null) return Problem("Enter valid Details");
-            try{
-                bool result=_service.CreateEmployee(employeeDetails);
-                return result?Ok("Employee Created successfully"):Problem("Something went wrong");
-            }
-             catch(ValidationException msg){
-                return Problem("Error:"+msg);
-            }
-            catch(Exception ex){
-                return Problem();
-            }
+        public IActionResult CreateEmployee(EmployeeDetails employeeDetails)
+        {
+            if (employeeDetails == null) return BadRequest("Enter valid Details");
+            bool result = _service.CreateEmployee(employeeDetails);
+            return result ? Ok("Employee Created successfully") : BadRequest("Something went wrong");
         }
         [HttpPut]
-         public IActionResult UpdateEmployee(EmployeeDetails employeeDetails){
-            //if(employeeDetails==null) return Problem("Enter valid Details");
-            try{
-                bool result=_service.UpdateEmployee(employeeDetails);
-                return result?Ok("Employee Updated successfully"):Problem("Something went wrong");
-            }
-            catch(ValidationException msg){
-                return Problem("Error:"+msg);
-            }
-            catch(Exception ex){
-                return Problem();
-            }
+        public IActionResult UpdateEmployee(EmployeeDetails employeeDetails)
+        {
+            if (employeeDetails == null) return BadRequest("Enter valid Details");
+            bool result = _service.UpdateEmployee(employeeDetails);
+            return result ? Ok("Employee Updated successfully") : BadRequest("Something went wrong");
         }
         [HttpDelete]
-        public IActionResult DeleteEmployee(int id){
-            if(id<=0)return NotFound("Invalid EmployeeId");
-            try{
-               bool result=_service.DeleteEmployee(id);
-                return result?Ok("Employee Deleted successfully"):NotFound("Invalid EmployeeId");
-            }
-            catch(Exception ex){
-                return Problem();
-            }
+        public IActionResult DeleteEmployee(int id)
+        {
+            if (id <= 0) return BadRequest("Invalid EmployeeId");
+            bool result = _service.DeleteEmployee(id);
+            return result ? Ok("Employee Deleted successfully") : BadRequest("Invalid EmployeeId");
         }
-        
+
     }
 }

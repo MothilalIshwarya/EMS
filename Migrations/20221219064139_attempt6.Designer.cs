@@ -4,6 +4,7 @@ using EmployeeManagementSystem.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.Migrations
 {
     [DbContext(typeof(EMScontext))]
-    partial class EMScontextModelSnapshot : ModelSnapshot
+    [Migration("20221219064139_attempt6")]
+    partial class attempt6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,17 +32,12 @@ namespace EmployeeManagementSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<int?>("employeeDetailsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("employeeDetailsId");
-
-                    b.ToTable("designations");
+                    b.ToTable("Designation");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Model.EmployeeDetails", b =>
@@ -71,6 +68,12 @@ namespace EmployeeManagementSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Genderid")
+                        .IsUnique();
+
+                    b.HasIndex("designationId")
+                        .IsUnique();
+
                     b.ToTable("EmployeeDetails");
                 });
 
@@ -82,42 +85,41 @@ namespace EmployeeManagementSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<int?>("EmployeeDetailsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("EmployeeDetailsId");
+                    b.ToTable("Gender");
+                });
 
-                    b.ToTable("genders");
+            modelBuilder.Entity("EmployeeManagementSystem.Model.EmployeeDetails", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Model.Gender", "gender")
+                        .WithOne("EmployeeDetails")
+                        .HasForeignKey("EmployeeManagementSystem.Model.EmployeeDetails", "Genderid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EmployeeManagementSystem.Model.Designation", "Designation")
+                        .WithOne("employeeDetails")
+                        .HasForeignKey("EmployeeManagementSystem.Model.EmployeeDetails", "designationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Designation");
+
+                    b.Navigation("gender");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Model.Designation", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.Model.EmployeeDetails", "employeeDetails")
-                        .WithMany("Designation")
-                        .HasForeignKey("employeeDetailsId");
-
                     b.Navigation("employeeDetails");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Model.Gender", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.Model.EmployeeDetails", "EmployeeDetails")
-                        .WithMany("gender")
-                        .HasForeignKey("EmployeeDetailsId");
-
                     b.Navigation("EmployeeDetails");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.Model.EmployeeDetails", b =>
-                {
-                    b.Navigation("Designation");
-
-                    b.Navigation("gender");
                 });
 #pragma warning restore 612, 618
         }

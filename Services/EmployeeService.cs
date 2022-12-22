@@ -5,59 +5,40 @@ using EmployeeManagementSystem.Validations;
 
 namespace EmployeeManagementSystem.Services
 {
-    public class EmployeeService
+    public class EmployeeService : Iservice
     {
-        private readonly EmployeeRepository _Repo;
-        public EmployeeService(EmployeeRepository _EmployeeRepository){
-            _Repo=_EmployeeRepository;
+        private readonly IRepository _repo;
+        public EmployeeService(IRepository _EmployeeRepository)
+        {
+            _repo = _EmployeeRepository;
         }
-        public IEnumerable<EmployeeDetails> GetAllEmployeeDetails(){
-            try{
-                return _Repo.GetAllEmployeeDetails();
-            }
-            catch(Exception ex){
-                throw;
-            }
+        public IEnumerable<EmployeeDetails> GetAllEmployeeDetails()
+        {
+            return _repo.GetAllEmployeeDetails();
         }
-        public EmployeeDetails GetEmployeeDetailById(int id){
-            try{
-                return _Repo.GetEmployeeDetailById(id);
-            }
-             catch(Exception ex){
-                throw;
-            }
+        public EmployeeDetails GetEmployeeDetailById(int id)
+        {
+            return _repo.GetEmployeeDetailById(id);
+
         }
-        public bool CreateEmployee(EmployeeDetails employeeDetails){
-           EMSValidation.EmployeeValidation(employeeDetails);
-            try{
-                 return _Repo.CreateEmployee(employeeDetails);
-            }
-            catch(ValidationException msg){
-                throw;
-            }
-            catch(Exception ex){
-                  return false;
-            }
+        public bool CreateEmployee(EmployeeDetails employeeDetails)
+        {
+            Validation.EmployeeValidation(employeeDetails);
+
+            return _repo.CreateEmployee(employeeDetails);
+
         }
-        public bool UpdateEmployee(EmployeeDetails employeeDetails){
-            EMSValidation.EmployeeValidation(employeeDetails);
-            try{
-                return _Repo.UpdateEmployee(employeeDetails);
-            }
-             catch(ValidationException msg){
-                throw;
-            }
-            catch(Exception ex){
-                return false;
-            }
+        public bool UpdateEmployee(EmployeeDetails employeeDetails)
+        {
+            Validation.EmployeeValidation(employeeDetails);
+
+            return _repo.UpdateEmployee(employeeDetails);
+
         }
-        public bool DeleteEmployee(int id){
-            try{
-                return _Repo.DeleteEmployee(id);
-            }
-            catch(Exception ex){
-                return false;
-            }
+        public bool DeleteEmployee(int id)
+        {
+            return _repo.DeleteEmployee(id);
+
         }
 
     }

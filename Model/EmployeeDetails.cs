@@ -1,24 +1,26 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 namespace EmployeeManagementSystem.Model
 {
     public class EmployeeDetails
     {
         [Key]
-        public int Id {get;set;}
-        [Required]
-        [MinLength(3)]
-        [MaxLength(30)]
-        public string? Name {get;set;}
-        [Required]
-        public string? Mailid {get;set;}
-        [Required]
-        public string? Address {get;set;}
+        public int Id { get; set; }
         
-        public DateTime DOB {get;set;}
-        [Required]
-        public string? Gender {get;set;}
-        [Required]
-        public string? Designation{get;set;}
+        public string? Name { get; set; }
+        
+        public string? Mailid { get; set; }
+       
+        public string? Address { get; set; }
+
+        public DateTime DOB { get; set; }
+       
+        public int Genderid { get; set; }
+       
+        public int designationId { get; set; }
+        public virtual ICollection<Gender>? gender{get;set;}
+        public virtual ICollection<Designation>? Designation{get;set;}
+
     }
 }

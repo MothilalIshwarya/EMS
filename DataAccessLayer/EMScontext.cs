@@ -9,6 +9,8 @@ namespace EmployeeManagementSystem.DataAccessLayer
 
         }
         public DbSet<EmployeeDetails>EmployeeDetails{get;set;}
+        public DbSet<Gender>genders{get;set;}
+        public DbSet<Designation>designations{get;set;}
         
     }
     
